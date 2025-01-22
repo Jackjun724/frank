@@ -27,7 +27,6 @@ const getImgUrl = (skin: SkinData) => {
 </script>
 <template>
     <n-scrollbar style="height: 442px;padding-right: 1px;">
-        {{ currentSkin }}
         <div class="grid grid-cols-2 gap-4 p-2">
             <div v-for="skin in skinList" class="flex justify-center">
                 <div class="relative group hover:scale-105 transition-transform">
