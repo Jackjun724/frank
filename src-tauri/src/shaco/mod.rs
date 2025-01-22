@@ -1,6 +1,6 @@
-pub mod model;
-pub mod ws;
 pub mod error;
-pub mod utils;
 pub mod ingame;
+pub mod model;
 pub mod rest;
+pub mod utils;
+pub mod ws;

@@ -18,7 +18,7 @@ pub async fn listen_client(app: AppHandle) {
             "client_status",
             event.data,
         )
-            .unwrap();
+        .unwrap();
     }
 }
 
@@ -34,7 +34,9 @@ pub async fn listen_champ_select(app: AppHandle) {
         app.emit_to(
             EventTarget::labeled("background"),
             "lol-champ-select",
-            event.data).unwrap();
+            event.data,
+        )
+        .unwrap();
     }
 }
 
@@ -58,6 +60,8 @@ pub async fn listen_current_champ_select(app: AppHandle) {
         app.emit_to(
             EventTarget::labeled("background"),
             "lol-current-champ-select",
-            event.data).unwrap();
+            event.data,
+        )
+        .unwrap();
     }
 }

@@ -8,7 +8,9 @@ use tokio::{
     task::JoinHandle,
 };
 
-use crate::shaco::{error::IngameClientError, model::ingame::*, utils::request::build_reqwest_client};
+use crate::shaco::{
+    error::IngameClientError, model::ingame::*, utils::request::build_reqwest_client,
+};
 
 const PORT: u16 = 2999;
 

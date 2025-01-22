@@ -1,0 +1,3 @@
+[submodule "src-tauri/lol-skins-developer"]
+	path = src-tauri/lol-skins-developer
+	url = https://github.com/koobzaar/lol-skins-developer.git

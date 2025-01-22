@@ -72,18 +72,18 @@ struct RootInterface {
 
 #[derive(Serialize, Deserialize)]
 struct Stats {
-    assists: i16, //1
-    champLevel: i16,//1
-    deaths: i16,// 1
-    item0: i32,//1
-    item1: i32,//1
-    item2: i32,//1
-    item3: i32,//1
-    item4: i32,//1
-    item5: i32,//1
-    item6: i32,//1
-    kills: i16, //1
-    win: bool,// 1
+    assists: i16,    //1
+    champLevel: i16, //1
+    deaths: i16,     // 1
+    item0: i32,      //1
+    item1: i32,      //1
+    item2: i32,      //1
+    item3: i32,      //1
+    item4: i32,      //1
+    item5: i32,      //1
+    item6: i32,      //1
+    kills: i16,      //1
+    win: bool,       // 1
 }
 
 #[derive(Serialize, Deserialize)]
@@ -116,10 +116,9 @@ struct Timeline {
 #[derive(Serialize, Deserialize)]
 pub struct MatchListDetails {
     pub accountId: i64,
-    pub games:Games,
-    pub platformId:String,
+    pub games: Games,
+    pub platformId: String,
 }
-
 
 /*assists: i16, //1
 causedEarlySurrender: bool,

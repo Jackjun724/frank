@@ -34,6 +34,14 @@
       "icons/128x128@2x.png",
       "icons/icon.icns",
       "icons/icon.ico"
+    ],
+    "resources": {
+      "sidecar/cslol-dll.dll": "./cslol-dll.dll",
+      "sidecar/mod-tools.exe": "./mod-tools.exe",
+      "lol-skins-developer": "./lol-skins-developer"
+    },
+    "externalBin": [
+      "sidecar/Hermes"
     ]
   }
 }
