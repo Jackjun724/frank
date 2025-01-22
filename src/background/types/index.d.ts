@@ -8,6 +8,7 @@ export interface ConfigSettingTypes {
   isGameInTips:boolean;
   autoWriteBlock:boolean;
   inWinOpacity:number;
+  gamePath:string;
 }
 export interface ConfigRank {
   tier: number;

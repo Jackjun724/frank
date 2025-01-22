@@ -4,6 +4,7 @@ import {useRouter} from "vue-router";
 import {window} from "@tauri-apps/api";
 import {invoke} from "@tauri-apps/api/core";
 import {useRuneStore} from "@/main/store/useRune";
+import {useSkinStore} from "@/main/store/useSkin";
 import {useMessage,MessageReactive} from "naive-ui"
 import Dashboard from "@/main/common/dashboard.vue"
 import {emitTo, listen} from '@tauri-apps/api/event';
@@ -18,6 +19,7 @@ const message = useMessage()
 let messageReactive: MessageReactive | null = null
 const teammateStore = useTeammateStore()
 const runeStore = useRuneStore()
+const skinStore = useSkinStore()
 const recordStore = useRecordStore()
 
 onMounted(() => {
@@ -130,10 +132,15 @@ class GameState {
     if (content === 0) {
       return
     }
-    runeStore.initStore(content).then((res) => {
-      if (res) {
+    Promise.all([
+      runeStore.initStore(content),
+      skinStore.initSkin(content)
+    ]).then(([runeRes, skinRes]) => {
+      if (skinRes) {
+        message.error('当前英雄暂无皮肤数据') 
+      }
+      if (runeRes) {
         message.error('当前英雄暂无符文数据')
-        return
       } else {
         this.changeState(id, 'rune', 3)
       }
@@ -166,7 +173,7 @@ class GameState {
     })
   }
   // 处理AddBlackList状态
-  public handleAddBlackList = (gameId:number) => {
+  public handleAddBlackList = (gameId: number) => {
     this.changeState('GameStart', 'record', 4)
     recordStore.getParticipantsInfo(gameId)
   }
@@ -192,7 +199,7 @@ listen<{ messageId:string,content:string}>('clientStatus', (event) => {
     case 'EndOfGame':
       return gameState.handleEndOfGame()
     case 'AddBlackList':
-      return gameState.handleAddBlackList(event.payload.content as number)
+      return gameState.handleAddBlackList(Number(event.payload.content))
   }
 })
 

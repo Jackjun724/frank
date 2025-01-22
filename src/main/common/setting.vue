@@ -2,15 +2,14 @@
 import {Ref, ref} from "vue";
 import {ConfigSettingTypes} from "@/background/types/";
 import {optionsChampion, keywordsList} from "@/resources/champList";
-import {NDrawerContent,NModal, NTag,NButton, NSelect, NSwitch, NSlider, NRadio,NList,NListItem, useDialog} from 'naive-ui'
+import {NDrawerContent, NTag,NButton, NSelect, NSwitch, NSlider, NRadio,NList,NListItem, useDialog, NInput} from 'naive-ui'
 import {relaunch} from "@tauri-apps/plugin-process";
-import Sponsor from "./sponsor.vue";
 import { open } from '@tauri-apps/plugin-shell';
+import { open as openDialog } from '@tauri-apps/plugin-dialog';
 
 const config:Ref<ConfigSettingTypes> = ref(JSON.parse(localStorage.getItem('configSetting') as string))
 const theme = localStorage.getItem('theme')  || 'light'
 const dialog = useDialog()
-const showModal = ref(false)
 declare const __APP_VERSION__: string;
 const version = __APP_VERSION__;
 
@@ -85,9 +84,19 @@ const restart = async () => {
   await relaunch()
 }
 
-const sponsor = () => {
-  showModal.value = true
+const selectGamePath = async () => {
+  const file = await openDialog({
+    multiple: false,
+    directory: true,
+  });
+  console.log(file);
+  
+  if (file) {
+    config.value.gamePath = file as string
+    saveConfig()
+  }
 }
+
 </script>
 
 <template>
@@ -95,12 +104,23 @@ const sponsor = () => {
     <n-list>
         <n-list-item style="padding-top: 0px;">
           <div class="gap-x-5 flex justify-between items-center">
-            <n-tag :bordered="false">鼓励开发</n-tag>
-            <n-button
-              @click="sponsor"
-              style="width:186px;" size="small" secondary :bordered="false" type="warning">
-              赞助 Frank 英雄联盟助手
-            </n-button>
+            <n-tag :bordered="false">游戏目录</n-tag>
+            <div class="flex flex-grow items-center justify-between">
+              <n-input
+                v-model:value="config.gamePath"
+                size="small"
+                placeholder="请选择游戏目录"
+                style="width: 120px"
+                readonly
+              />
+              <n-button
+                size="small"
+                secondary type="tertiary" 
+                @click="selectGamePath"
+              >
+                选择
+              </n-button>
+            </div>
           </div>
         </n-list-item>
         <!--        切换主题-->
@@ -219,18 +239,11 @@ const sponsor = () => {
               版本 {{version}}
             </n-button>
             <n-button
-              size="small" secondary type="tertiary" @click="openWeb(true)">
-              By Java_S
-            </n-button>
-            <n-button
               size="small" secondary type="tertiary" @click="restart">
               重启
             </n-button>
           </div>
         </n-list-item>
       </n-list>
-    <n-modal style="margin:8px;max-width:334px" v-model:show="showModal">
-      <Sponsor :is-completed="false"></Sponsor>
-    </n-modal>
   </n-drawer-content>
 </template>

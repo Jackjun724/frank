@@ -73,11 +73,7 @@ const menu = await Menu.new({
       action: () => {
         exit(1);
       },
-    },
-    {
-      id: 'author',
-      text: '@Java_S',
-    },
+    }
   ],
 });
 
