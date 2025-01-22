@@ -43,11 +43,12 @@ class GameState {
   }
   // 改变底部页面图标
   public navigateToPage = (page: string, index: number) => {
-    if (!this.preventAccess(index)) {
-      const mess = index===2?'选择英雄阶段，方可使用':'选择英雄之后，才可使用'
-      message.warning(mess, {duration: 2000})
-      return
-    }
+    // if (!this.preventAccess(index)) {
+    //   const mess = index===2?'选择英雄阶段，方可使用':'选择英雄之后，才可使用'
+    //   message.warning(mess, {duration: 2000})
+    //   return
+    // }
+    gameState.handleChampion('Champion', 1)
     curPos.value = index
     router.push({name: page})
   }
@@ -142,7 +143,7 @@ class GameState {
       if (runeRes) {
         message.error('当前英雄暂无符文数据')
       } else {
-        this.changeState(id, 'rune', 3)
+        // this.changeState(id, 'rune', 3)
       }
     })
   }

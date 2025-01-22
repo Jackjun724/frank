@@ -27,6 +27,16 @@ impl Serialize for Error {
 }
 
 #[command]
+pub async fn reset_skin() -> Result<()> {
+    let has_champions = std::path::Path::new("profiles").exists();
+    if has_champions {
+        std::fs::remove_dir_all("profiles")?;
+    }
+    std::fs::create_dir("profiles")?;
+    Ok(())
+}
+
+#[command]
 pub async fn unzip_skin(src_zip: &str, game_path: &str) -> Result<String> {
     let target_dir = PathBuf::from("temp");
     let file = File::open(src_zip)?;

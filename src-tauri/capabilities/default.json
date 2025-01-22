@@ -10,8 +10,8 @@
     "recentMatchWindow"
   ],
   "permissions": [
+    "dialog:default",
     "fs:default",
-    "fs:allow-remove",
     "core:default",
     "opener:default",
     "process:default",
@@ -50,18 +50,6 @@
           "url": "https://game.gtimg.cn"
         }
       ]
-    },
-    {
-      "identifier": "fs:scope",
-      "allow": [
-        {
-          "path": "profiles/**/*"
-        },
-        {
-          "path": "lol-skins-developer/**/*"
-        }
-      ]
-    },
-    "dialog:default"
+    }
   ]
 }

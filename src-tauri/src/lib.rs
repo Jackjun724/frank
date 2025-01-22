@@ -5,7 +5,7 @@ use lcu::{
     get_match_list, init_keyboard, invoke_lcu, is_game_start, is_lol_cilent,
     listen_for_client_start, start_champ_select, start_current_champ_select, start_listener,
 };
-use skin::unzip_skin;
+use skin::{unzip_skin, reset_skin};
 use tauri_plugin_shell::ShellExt;
 
 #[tokio::main]
@@ -22,7 +22,8 @@ pub async fn run() {
             init_keyboard,
             listen_for_client_start,
             start_current_champ_select,
-            unzip_skin
+            unzip_skin,
+            reset_skin
         ])
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_http::init())

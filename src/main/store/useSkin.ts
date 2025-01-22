@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import { SkinStoreState, SkinStoreActions } from "@/main/views/skin/skinTypes";
 import { QuerySkin } from "@/main/views/skin/querySkin";
-import { exists, mkdir, remove } from '@tauri-apps/plugin-fs';
 import { invoke } from '@tauri-apps/api/core';
 import { ConfigSettingTypes } from "@/background/types";
 import { useMessage } from "naive-ui";
@@ -17,11 +16,7 @@ export const useSkinStore = defineStore<'useSkinStore', SkinStoreState, {}, Skin
     }),
     actions: {
         async changeSkin(skinId: number): Promise<any> {
-            const hasChampions = await exists('profiles');
-            if (hasChampions) {
-                await remove('profiles');
-            }
-            await mkdir('profiles', { recursive: true });
+            await invoke('reset_skin')
             if (skinId !== 0 && skinId !== this.skinDataList[0].id) {
                 const config: ConfigSettingTypes = JSON.parse(<string>(localStorage.getItem('configSetting')))
                 if(config.gamePath){
