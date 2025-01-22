@@ -11,7 +11,6 @@
   ],
   "permissions": [
     "dialog:default",
-    "fs:default",
     "core:default",
     "opener:default",
     "process:default",
