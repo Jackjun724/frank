@@ -1,11 +1,8 @@
 use serde::{ser::Serializer, Serialize};
 use std::fs::File;
 use std::path::PathBuf;
-use tauri::{
-    command,
-    plugin::{Builder, TauriPlugin},
-    Runtime, Window,
-};
+use tauri::command;
+use std::os::windows::process::CommandExt;
 
 type Result<T> = std::result::Result<T, Error>;
 
@@ -41,19 +38,18 @@ pub async fn unzip_skin(src_zip: &str, game_path: &str) -> Result<String> {
     let target_dir = PathBuf::from("temp");
     let file = File::open(src_zip)?;
     zip_extract::extract(file, &target_dir, true)?;
-
     let mut command = std::process::Command::new("mod-tools.exe");
     command
         .arg("mkoverlay")
         .arg("./")
         .arg("profiles")
         .arg(format!("--game:{}", game_path))
-        .arg("--mods:temp");
+        .arg("--mods:temp")
+        .creation_flags(0x08000000)
+        .stdout(std::process::Stdio::null())
+        .stderr(std::process::Stdio::null());
 
-    println!("执行命令: {:?}", command);
-    let output = command.output()?;
-    println!("命令输出: {:?}", String::from_utf8_lossy(&output.stdout));
-    println!("错误输出: {:?}", String::from_utf8_lossy(&output.stderr));
+    command.output()?;
 
     std::fs::remove_dir_all(target_dir)?;
     Ok("Extracted".to_string())
