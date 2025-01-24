@@ -63,6 +63,11 @@ export const getClientPath = async () => {
   if (storedPath?.toLowerCase() !== updatedPath.toLowerCase()) {
     localStorage.setItem('clientPath', updatedPath);
   }
+  const configSetting = JSON.parse(localStorage.getItem('configSetting') as string)
+  if (!configSetting.gamePath) {
+    configSetting.gamePath = clientPath.replace('LeagueClient', 'Game')
+    localStorage.setItem('configSetting',JSON.stringify(configSetting))
+  }
   return true
 }
 
