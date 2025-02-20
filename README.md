@@ -1,5 +1,5 @@
 <h2 align="center">
-Frank Edition (懂的人不言自明)
+Frank 换肤修改版
 </h2>
 <p align="center">
 <a href="https://lolfrank.cn" rel="nofollow"><img src="./public/preface.jpg"></a>
@@ -10,7 +10,7 @@ Frank Edition (懂的人不言自明)
 </p>
 
 ## 👋 介绍
-Frank是一款简洁的，轻量的，免费的，开源的英雄联盟助手。 本软件的使命是当好游戏玩家的幕后小助手，提供一些便捷游戏的服务，让你的游戏体验更上一层楼。 当然，Frank是正经助手，不搞幺蛾子！任何违反 Riot 和腾讯规定的行为，我们都不鼓励，更不支持。 毕竟，公平游戏才是真高手的战场！ 根据官方要求，Frank不再提供查询战绩的功能，如果您有这方面的需求，请使用WeGame或者掌上英雄联盟APP。
+这是基于原作Frank进行增加换肤能力的新工具
 
 ## 注意
 游戏目录选择Game目录，也就是有League of Legends.exe的目录。
